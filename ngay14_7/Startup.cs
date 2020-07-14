@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ngay14_7.Models;
 
 namespace ngay14_7
 {
@@ -23,7 +26,9 @@ namespace ngay14_7
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(option=>option.EnableEndpointRouting=false);// ++them doan nay
+            services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["ConectionString:DefaultConnection"]));//+++them doan nay
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();//+++them doan nay
+            services.AddMvc(option=>option.EnableEndpointRouting=false);// +++them doan nay
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +52,7 @@ namespace ngay14_7
 
             app.UseAuthorization();
 
-            app.UseMvcWithDefaultRoute();// ++them doan nay
+            app.UseMvcWithDefaultRoute();// +++them doan nay
         }
     }
 }
