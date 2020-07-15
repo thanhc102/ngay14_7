@@ -13,6 +13,11 @@ namespace ngay14_7.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult Register()
+        {
+            return View();
+        }
 
     }
 
