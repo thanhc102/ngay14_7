@@ -27,7 +27,14 @@ namespace ngay14_7
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer(Configuration["ConectionString:DefaultConnection"]));//+++them doan nay
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();//+++them doan nay
+            services.AddIdentity<IdentityUser, IdentityRole>(options=>
+            {
+                options.Password.RequiredLength = 4;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireNonAlphanumeric = false;//+++them doan nay
+            })
+                .AddEntityFrameworkStores<AppIdentityDbContext>().AddDefaultTokenProviders();//+++them doan nay
             services.AddMvc(option=>option.EnableEndpointRouting=false);// +++them doan nay
         }
 
@@ -49,6 +56,7 @@ namespace ngay14_7
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

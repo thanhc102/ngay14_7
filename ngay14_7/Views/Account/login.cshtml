@@ -1,14 +1,5 @@
-﻿<!--
-=========================================================
-* Argon Dashboard - v1.2.0
-=========================================================
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-
-* Copyright  Creative Tim (http://www.creative-tim.com)
-* Coded by www.creative-tim.com
-=========================================================
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
+﻿
+@model LoginAccountRequest
 <!DOCTYPE html>
 <html>
 
@@ -152,22 +143,24 @@
                             <div class="text-center text-muted mb-4">
                                 <small>Or sign in with credentials</small>
                             </div>
-                            <form role="form">
+                            <form method="post" asp-controller="Account" asp-action="Login">
                                 <div class="form-group mb-3">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Email" type="email">
+                                        <input class="form-control" asp-for="UserName" placeholder="Nhap ten tai khoan" type="text">
                                     </div>
+                                    <span class="text-warning" asp-validation-for="UserName"></span>
                                 </div>
                                 <div class="form-group">
                                     <div class="input-group input-group-merge input-group-alternative">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                                         </div>
-                                        <input class="form-control" placeholder="Password" type="password">
+                                        <input class="form-control" asp-for="Passwword" placeholder="Nhap mat khau" type="password">
                                     </div>
+                                    <span class="text-warning" asp-validation-for="Passwword"></span>
                                 </div>
                                 <div class="custom-control custom-control-alternative custom-checkbox">
                                     <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
@@ -176,7 +169,7 @@
                                     </label>
                                 </div>
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-primary my-4">Sign in</button>
+                                    <button type="submit" class="btn btn-primary my-4">Dang nhap tai khoan</button>
                                 </div>
                             </form>
                         </div>
