@@ -11,7 +11,7 @@ namespace ngay14_7.Controllers
     {   
         [HttpGet]
         [Authorize]
-        public IActionResult SecretIndex()
+        public IActionResult Index()
         {
             return View();
         }

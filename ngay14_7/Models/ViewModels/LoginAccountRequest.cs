@@ -13,5 +13,8 @@ namespace ngay14_7.Models.ViewModels
         [Required(ErrorMessage = "Mk ko dc bo trong")]
         [DataType(DataType.Password)]
         public string Passwword { get; set; }
+
+        public bool LoginSuccess { get; set; }
+        public string Error { get; set; }
     }
 }

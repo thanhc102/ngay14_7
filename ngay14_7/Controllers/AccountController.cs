@@ -22,7 +22,11 @@ namespace ngay14_7.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return View(new LoginAccountRequest()
+            {
+                LoginSuccess = false,
+                Error = ""
+            });
         }
         [HttpPost]
         public async Task<IActionResult> Login(LoginAccountRequest loginAccountRequest)
@@ -34,14 +38,18 @@ namespace ngay14_7.Controllers
             var user = await _userManager.FindByNameAsync(loginAccountRequest.UserName);
             if(user==null)
             {
-                return RedirectToAction(nameof(Register));
-                 
+                loginAccountRequest.LoginSuccess = false;
+                loginAccountRequest.Error = "Sai ten dang nhap";
+                return View(loginAccountRequest);
+
             }
             var result = await _signInManager.PasswordSignInAsync(user, loginAccountRequest.Passwword, false, false);
             if(result.Succeeded)
             {
-                return RedirectToAction("SecretIndex","Home");
+                return RedirectToAction("Index","Home");
             }
+            loginAccountRequest.LoginSuccess = false;
+            loginAccountRequest.Error = "Sai mat khau";
             return View();
         }
 
@@ -69,11 +77,11 @@ namespace ngay14_7.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("SecretIndex", "Home");
+            return RedirectToAction("Index", "Home");
         }
 
     }
