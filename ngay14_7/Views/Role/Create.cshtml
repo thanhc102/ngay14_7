@@ -1,0 +1,15 @@
+﻿@model AddRoleRequest
+@{ 
+    Layout = "_Layout";
+}
+<div>
+    <p class="btn btn-success text-white m-1 p-1">Trang tao role</p>
+    <form method="post" asp-controller="Role" asp-action="Create">
+        <div class="form-group">
+            <label class="text-white">Ten Role</label>
+            <input type="tel" class="form-control" asp-for="RoleName" placeholder="Nhap ten role"/>
+            
+        </div>
+        <button type="submit" class="btn btn-success">Tap role</button>
+    </form>
+</div>

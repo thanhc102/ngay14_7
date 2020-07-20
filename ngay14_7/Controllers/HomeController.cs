@@ -15,5 +15,7 @@ namespace ngay14_7.Controllers
         {
             return View();
         }
+
+
     }
 }
